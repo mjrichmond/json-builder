@@ -35,7 +35,8 @@ Builder.prototype.buildForm = function(json, name, html) {
 	
 	case "string":
 		html = Handlebars.templates["string"]({
-			name: name
+			name: name,
+			title: name.split(".").pop()
 		});
 		break;
 	}

@@ -14,8 +14,12 @@ templates['object'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0
 },"useData":true});
 templates['string'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", escapeExpression=this.escapeExpression;
-  return "<div class=\"string\">"
+  return "<div class=\"string\">\n	<label>\n		<div class=\"title\">"
+    + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
+    + "</div>\n		<input name=\""
     + escapeExpression(((helper = helpers.name || (depth0 && depth0.name)),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
-    + "</div>\n";
+    + "\" value=\""
+    + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
+    + "\">\n	</label>\n</div>\n";
 },"useData":true});
 })();

@@ -1,3 +1,6 @@
 <div class="string">
-	{{~name~}}
+	<label>
+		<div class="title">{{title}}</div>
+		<input name="{{name}}" value="{{title}}">
+	</label>
 </div>
