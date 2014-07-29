@@ -1,6 +1,11 @@
-function Builder() {
-	// ..
+function Builder(form) {
+	this.form = form;
 }
+
+Builder.prototype.init = function(json) {	
+	this.html = this.buildForm(json);
+	this.resetForm();
+};
 
 Builder.prototype.buildForm = function(json, name, html) {
 	if (!json.type) {
@@ -40,6 +45,10 @@ Builder.prototype.buildForm = function(json, name, html) {
 		});
 		break;
 	}
-
+	
 	return html;
+};
+
+Builder.prototype.resetForm = function() {
+	this.form.html(this.html);
 };

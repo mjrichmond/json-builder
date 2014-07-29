@@ -10,7 +10,7 @@
 	</head>
 	<body>
 
-	<div id="target"></div>
+	<form id="form"></div>
 	
 	<script src="js/jquery.js"></script>
 	<script src="js/handlebars.runtime.js"></script>
@@ -19,11 +19,12 @@
 	<script src="../src/builder.templates.js"></script>
 
 	<script>
+	var builder;
 	$(function() {
-		var builder = new Builder();
+		var form = $("#form");
+		builder = new Builder(form);
 		$.getJSON("json/schema.json", function(json) {
-			var form = builder.buildForm(json);
-			$("#target").html(form);
+			builder.init(json);
 		});
 	});
 	</script>
