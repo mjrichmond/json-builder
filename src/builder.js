@@ -62,8 +62,14 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 	switch (type) {
 	case "array":
 		var array = scope.find("[data-name='" + name + "']");
+		scope = array;
 		for (var i in json) {
-			this.setFormValues(json[i], array, name);
+			if (i != 0) { 
+				scope = array
+					.clone()
+					.insertAfter(array);
+			}
+			this.setFormValues(json[i], scope, name);
 		}
 		break;
 	
