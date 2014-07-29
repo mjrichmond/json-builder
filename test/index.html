@@ -12,28 +12,12 @@
 
 	<div id="target"></div>
 	
-	<div id="templates">
-		<script type="text/html" data-name="array">
-		<div class="array">
-			{{{html}}}
-			<button>+ Add</button>
-		</div>
-		</script>
-		<script type="text/html" data-name="object">
-		<div class="object">
-			{{{html}}}
-		</div>
-		</script>
-		<script type="text/html" data-name="string">
-		<div class="string">
-			{{~name~}}
-		</div>
-		</script>
-	</div>
-	
 	<script src="js/jquery.js"></script>
-	<script src="js/handlebars.js"></script>
+	<script src="js/handlebars.runtime.js"></script>
+
 	<script src="../src/builder.js"></script>
+	<script src="../src/builder.templates.js"></script>
+
 	<script>
 	$(function() {
 		var builder = new Builder();
