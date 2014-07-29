@@ -19,12 +19,22 @@
 	<script src="../src/builder.templates.js"></script>
 
 	<script>
-	var builder;
 	$(function() {
 		var form = $("#form");
-		builder = new Builder(form);
-		$.getJSON("json/schema.json", function(json) {
-			builder.init(json);
+		var builder = new Builder(form);
+		$.ajax({
+		  dataType: "json",
+			url: "json/schema.json",
+			success: function(data) {
+				builder.init(data);
+				$.ajax({
+					dataType: "json",
+					url: "json/resume.json",
+					success: function(data) {
+						builder.setFormValues(data);
+					}
+				});
+			}
 		});
 	});
 	</script>

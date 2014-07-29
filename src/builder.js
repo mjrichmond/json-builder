@@ -1,8 +1,10 @@
 function Builder(form) {
 	this.form = form;
+	this.json = null;
 }
 
 Builder.prototype.init = function(json) {	
+	this.json = json;
 	this.html = this.buildForm(json);
 	this.resetForm();
 };
@@ -30,7 +32,7 @@ Builder.prototype.buildForm = function(json, name, html) {
 		}
 		var props = json.properties;
 		for (var i in props) {
-			html += this.buildForm(props[i], (name || "") + i);
+			html += this.buildForm(props[i], name + i);
 		}
 		html = Handlebars.templates["object"]({
 			name: name,
@@ -49,6 +51,44 @@ Builder.prototype.buildForm = function(json, name, html) {
 	return html;
 };
 
+Builder.prototype.setFormValues = function(json, scope, name) {
+	scope = scope || this.form;
+	name = name || "";
+	if (name == "") {
+		this.resetForm();
+	}
+	
+	var type = $.type(json);
+	switch (type) {
+	case "array":
+		var array = scope.find("[data-name='" + name + "']");
+		for (var i in json) {
+			this.setFormValues(json[i], array, name);
+		}
+		break;
+	
+	case "object":
+		if (name) {
+			name += ".";
+		}
+		for (var i in json) {
+			this.setFormValues(json[i], scope, name + i);
+		}
+		break;
+	
+	case "string":
+		var input = scope.find("[name='" + name + "']");
+		input.val(json);
+		break;
+	}
+};
+
+Builder.prototype.getFormValues = function(json, name) {
+	json = json || this.json;
+	name = name || "";
+};
+
 Builder.prototype.resetForm = function() {
 	this.form.html(this.html);
 };
+

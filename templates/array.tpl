@@ -1,4 +1,6 @@
-<div class="array">
+<div class="array" data-name="{{name}}">
 	{{{html}}}
-	<button>+ Add</button>
 </div>
+<button class="append">
+	+ Add
+</button>
