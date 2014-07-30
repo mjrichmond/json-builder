@@ -1,6 +1,9 @@
-<div class="array" data-name="{{name}}">
-	{{{html}}}
+<div class="array">
+	<div class="title">{{title}}</div>
+	<div class="item" data-name="{{name}}">
+		{{{html}}}
+	</div>
+	<button class="append">
+		+ Add
+	</button>
 </div>
-<button class="append">
-	+ Add
-</button>

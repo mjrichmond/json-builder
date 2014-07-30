@@ -25,11 +25,13 @@
 		$.ajax({
 		  dataType: "json",
 			url: "json/schema.json",
+			cache: false,
 			success: function(data) {
 				builder.init(data);
 				$.ajax({
 					dataType: "json",
 					url: "json/resume.json",
+					cache: false,
 					success: function(data) {
 						builder.setFormValues(data);
 					}

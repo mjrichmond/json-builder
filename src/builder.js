@@ -11,7 +11,7 @@ Builder.prototype.init = function(json) {
 	var form = this.form;
 	form.on("click", ".append", function(e) {
 		e.preventDefault();
-		var prev = $(this).prev(".array");
+		var prev = $(this).prev(".item");
 		if (!prev) {
 			return;
 		}
@@ -20,7 +20,7 @@ Builder.prototype.init = function(json) {
 			.find("input")
 			.val("")
 			.end()
-			.find(".array:gt(0)")
+			.find(".item:gt(0)")
 			.remove();
 		form.trigger("change");
 	}).on("input", "input, textarea", function() {
@@ -38,11 +38,14 @@ Builder.prototype.buildForm = function(json, name, html) {
 	name = name || "";
 	html = html || "";
 
+	var title = name.split(".").pop();
+
 	switch (json.type) {
 	case "array":
 		var items = json.items;
 		html = Handlebars.templates["array"]({
 				name: name,
+				title: title,
 				html: this.buildForm(items, name)
 		});
 		break;
@@ -55,8 +58,10 @@ Builder.prototype.buildForm = function(json, name, html) {
 		for (var i in props) {
 			html += this.buildForm(props[i], name + i);
 		}
+		console.log(name.split("."));
 		html = Handlebars.templates["object"]({
 			name: name,
+			title: title,
 			html: html
 		});
 		break;
@@ -64,7 +69,7 @@ Builder.prototype.buildForm = function(json, name, html) {
 	case "string":
 		html = Handlebars.templates["string"]({
 			name: name,
-			title: name.split(".").pop()
+			title: title
 		});
 		break;
 	}
@@ -88,7 +93,7 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 				array = array
 					.clone()
 					.insertAfter(array)
-					.find(".array:gt(0)")
+					.find(".item:gt(0)")
 					.remove()
 					.end();
 			}
