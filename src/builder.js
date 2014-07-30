@@ -24,6 +24,13 @@ Builder.prototype.init = function(json) {
 		}
 		form.trigger("change");
 	});
+
+	form.on("click", ".remove", function(e) {
+		e.preventDefault();
+		$(this).prev().prev(".item").remove();
+		form.trigger("change");
+	});
+
 	form.on("input", "input, textarea", function() {
 		form.trigger("change");
 	});

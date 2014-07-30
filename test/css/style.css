@@ -6,35 +6,67 @@ body {
 	margin: 100px 0;
 }
 input {
+	border: none;
+	border-bottom: 1px solid #ddd;
+	font-size: 13px;
+	margin: 0;
+	outline: none;
+	padding: 6px 0px;
+	resize: none;
 	width: 100%;
-	padding: 4px 6px;
+}
+button {
+	background: #ececec;
+	background-image: linear-gradient(#f4f4f4, #ececec);
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	font-size: 13px;
+	margin: 0;
+	margin-top: 8px;
+	outline: 0;
+	padding: 4px 8px;
 }
 .title {
 	text-transform: capitalize;
 }
+.header {
+	background: #ececec;
+	background-image: linear-gradient(#f4f4f4, #ececec);
+	border-bottom: 1px solid #ddd;
+	height: 7px;
+}
+.content {
+	padding: 10px;
+}
 .array > .title {
 	font-weight: bold;
-	margin: 20px 0 10px;
+	margin: 15px 0px;
 }
 .array .item {
-	border: 1px solid #d4d4d4;
+	border: 1px solid #ddd;
 	border-radius: 2px;
-	padding: 10px;
+	overflow: hidden;
 }
 .array .item + .item {
 	margin-top: 10px;
 }
-.array .item > .string .title {
+.array .item .content > .string input {
+	border-bottom: none;
+	padding: 0;
+}
+.array .item .content > .string .title {
 	display: none;
 }
-.string {
-	margin-bottom: 5px;
+.string .title {
+	color: #999;
+	font-size: 11px;
+	text-transform: uppercase;
 }
-.append {
-	margin: 0px;
+.string + .string,
+.string + .object {
 	margin-top: 8px;
 }
 #form {
-	max-width: 320px;
+	max-width: 280px;
 	margin: 0 auto;
 }
