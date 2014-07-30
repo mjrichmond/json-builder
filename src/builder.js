@@ -12,6 +12,9 @@ Builder.prototype.init = function(json) {
 	var form = this.form;
 	form.on("click", ".append", function(e) {
 		e.preventDefault();
+		var self = $(this);
+		self.before(self.closest(".array").data("item"));
+		/*
 		var prev = $(this).prev(".item");
 		if (prev) {
 			prev.clone()
@@ -22,12 +25,14 @@ Builder.prototype.init = function(json) {
 				.find(".item:gt(0)")
 				.remove();
 		}
+		*/
 		form.trigger("change");
 	});
 
 	form.on("click", ".remove", function(e) {
 		e.preventDefault();
-		$(this).prev().prev(".item").remove();
+		var self = $(this);
+		self.closest(".array").children(".item").last().remove();
 		form.trigger("change");
 	});
 
@@ -38,6 +43,11 @@ Builder.prototype.init = function(json) {
 
 Builder.prototype.resetForm = function() {
 	this.form.html(this.html);
+	var arrays = this.form.find(".array").get().reverse();
+	$(arrays).each(function() {	
+		var self = $(this);
+		self.data("item", self.children(".item").clone());
+	});
 };
 
 Builder.prototype.buildForm = function(json, name, html) {
