@@ -45,8 +45,16 @@
 
 		var output = $("#output");
 		form.on("change", function() {
-			output.html(builder.getFormValuesAsJSON());
-			console.log("`change` triggered");
+			output.val(builder.getFormValuesAsJSON());
+		});
+
+		output.on("input", function() {
+			try {
+				var text = output.val();
+				builder.setFormValues(JSON.parse(text));
+			} catch(e) {
+				// ..
+			}
 		});
 	});
 	</script>
