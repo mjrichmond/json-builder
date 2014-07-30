@@ -7,6 +7,27 @@ Builder.prototype.init = function(json) {
 	this.json = json;
 	this.html = this.buildForm(json);
 	this.resetForm();
+	
+	var form = this.form;
+	form.on("click", ".append", function(e) {
+		e.preventDefault();
+		var prev = $(this).prev(".array");
+		if (!prev) {
+			return;
+		}
+		prev.clone()
+			.insertAfter(prev)
+			.find("input")
+			.val("")
+			.end()
+			.find(".array:gt(0)")
+			.remove();
+		form.trigger("change");
+	}).on("input", "input, textarea", function() {
+		form.trigger("change");
+	}).on("change", function() {
+		console.log("CHANGE");
+	});
 };
 
 Builder.prototype.buildForm = function(json, name, html) {
