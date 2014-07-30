@@ -133,6 +133,53 @@
 
 			}
 		},
+		"volunteer": {
+			"type": "array",
+			"additionalItems": false,
+			"items": {
+		  	"type": "object",
+		  	"additionalProperties": false,
+			"properties": {
+			  	"organization": {
+			  		"type": "string",
+			  		"description": "e.g. Facebook"
+			  	},
+			  	"position": {
+			  		"type": "string",
+			  		"description": "e.g. Software Engineer"
+			  	},
+			  	"website": {
+			  		"type": "string",
+			  		"description": "e.g. http://facebook.com",
+			  		"format": "uri"
+			  	},
+			  	"startDate": {
+			  		"type": "string",
+			  		"description": "resume.json uses the ISO 8601 date standard e.g. 2014-06-29",
+			  		"format": "date"
+			  	},
+			  	"endDate": {
+			  		"type": "string",
+			  		"description": "e.g. 2012-06-29",
+			  		"format": "date"
+			  	},
+			  	"summary": {
+			  		"type": "string",
+			  		"description": "Give an overview of your responsibilities at the company"
+			  	},
+			  	"highlights": {
+			  		"type": "array",
+			  		"description": "Specify multiple accomplishments",
+			  		"additionalItems": false,
+			  		"items": {
+			  			"type": "string",
+			  			"description": "e.g. Increased profits by 20% from 2011-2012 through viral advertising"
+			  		}
+			  	}
+			  }
+
+			}
+		},
 		"education": {
 			"type": "array",
 			"additionalItems": false,
@@ -200,6 +247,10 @@
 				  	"awarder": {
 				  		"type": "string",
 				  		"description": "e.g. Time Magazine"
+				  	},
+				  	"summary": {
+				  		"type": "string",
+				  		"description": "e.g. Received for my work with Quantum Physics"
 				  	}
 				}
 			}
@@ -263,7 +314,26 @@
 				}
 			}
 		},
-		"hobbies": {
+		"languages": {
+			"type": "array",
+			"description": "List any other languages you speak",
+			"additionalItems": false,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"properties": {
+					"language": {
+						"type": "string",
+						"description": "e.g. English, Spanish"
+					},
+					"fluency": {
+						"type": "string",
+						"description": "e.g. Fluent, Beginner"
+					}
+				}
+			}
+		},
+		"interests": {
 			"type": "array",
 			"additionalItems": false,
 			"items": {
