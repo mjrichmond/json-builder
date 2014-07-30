@@ -6,28 +6,31 @@ function Builder(form) {
 Builder.prototype.init = function(json) {	
 	this.json = json;
 	this.html = this.buildForm(json);
+
 	this.resetForm();
 	
 	var form = this.form;
 	form.on("click", ".append", function(e) {
 		e.preventDefault();
 		var prev = $(this).prev(".item");
-		if (!prev) {
-			return;
+		if (prev) {
+			prev.clone()
+				.insertAfter(prev)
+				.find("input")
+				.val("")
+				.end()
+				.find(".item:gt(0)")
+				.remove();
 		}
-		prev.clone()
-			.insertAfter(prev)
-			.find("input")
-			.val("")
-			.end()
-			.find(".item:gt(0)")
-			.remove();
 		form.trigger("change");
-	}).on("input", "input, textarea", function() {
-		form.trigger("change");
-	}).on("change", function() {
-		console.log("CHANGE");
 	});
+	form.on("input", "input, textarea", function() {
+		form.trigger("change");
+	});
+};
+
+Builder.prototype.resetForm = function() {
+	this.form.html(this.html);
 };
 
 Builder.prototype.buildForm = function(json, name, html) {
@@ -58,7 +61,6 @@ Builder.prototype.buildForm = function(json, name, html) {
 		for (var i in props) {
 			html += this.buildForm(props[i], name + i);
 		}
-		console.log(name.split("."));
 		html = Handlebars.templates["object"]({
 			name: name,
 			title: title,
@@ -87,11 +89,14 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 	var type = $.type(json);
 	switch (type) {
 	case "array":
-		var array = scope.find("[data-name='" + name + "']");
+		var array = scope.find(".item[data-name='" + name + "']");
 		for (var i in json) {
 			if (i != 0) { 
 				array = array
 					.clone()
+					.find("input")
+					.val("")
+					.end()
 					.insertAfter(array)
 					.find(".item:gt(0)")
 					.remove()
@@ -111,18 +116,81 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 		break;
 	
 	case "string":
-		var input = scope.find("[name='" + name + "']");
+		var input = scope.find("input[name='" + name + "']");
 		input.val(json);
 		break;
 	}
 };
 
-Builder.prototype.getFormValues = function(json, name) {
-	json = json || this.json;
-	name = name || "";
+Builder.prototype.getFormValuesAsJSON = function() {
+	var values = this.getFormValues();
+	var json = JSON.stringify(values, null, "  ");
+	return json;
 };
 
-Builder.prototype.resetForm = function() {
-	this.form.html(this.html);
-};
+Builder.prototype.getFormValues = function() {
+	var form = this.form;
+	var values = {};
 
+	(function iterate(obj, form, scope, name) {
+		if (!obj.type) {
+			return;
+		}
+		
+		scope = scope || values;
+		name = name || "";
+
+		var key = name.split(".").pop();
+
+		switch (obj.type) {
+		case "array":
+			scope[key] = [];
+			var array = form.find(".item[data-name='" + name + "']");
+			var i = 0;
+			array.each(function() {
+				iterate(
+					obj.items,
+					$(this),
+					scope[key],
+					name
+				);
+				i++;
+			});
+			break;
+		
+		case "object":
+			var props = obj.properties;
+			var type = $.type(scope);
+			if (type == "array") {
+				scope.push({});
+			} else if (key !== "") {
+				scope[key] = {};
+			}
+			if (name) {
+				name += ".";
+			}
+			for (var i in props) {
+				iterate(
+					props[i],
+					form,
+					type == "array" ? scope[scope.length - 1] : scope[key],
+					name + i
+				);
+			}
+			break;
+		
+		case "string":
+			var inputs = form.find("input[name='" + name + "']");
+			if ($.type(scope) != "array") {
+				scope[key] = inputs.eq(0).val();
+			} else {
+				inputs.each(function() {
+					scope.push($(this).val());
+				});
+			}
+			break;
+		}
+	})(this.json, form);
+	
+	return values;
+};

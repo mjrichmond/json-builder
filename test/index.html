@@ -38,6 +38,9 @@
 				});
 			}
 		});
+		form.on("change", function() {
+			console.log(builder.getFormValuesAsJSON());
+		});
 	});
 	</script>
 	
