@@ -10,7 +10,10 @@
 	</head>
 	<body>
 
-	<form id="form"></div>
+	<div id="wrap">
+		<form id="form"></div>
+		<textarea id="output"></textarea>
+	</div>
 	
 	<script src="js/jquery.js"></script>
 	<script src="js/handlebars.runtime.js"></script>
@@ -22,6 +25,7 @@
 	$(function() {
 		var form = $("#form");
 		var builder = new Builder(form);
+
 		$.ajax({
 		  dataType: "json",
 			url: "json/schema.json",
@@ -38,8 +42,11 @@
 				});
 			}
 		});
+
+		var output = $("#output");
 		form.on("change", function() {
-			console.log(builder.getFormValuesAsJSON());
+			output.html(builder.getFormValuesAsJSON());
+			console.log("`change` triggered");
 		});
 	});
 	</script>

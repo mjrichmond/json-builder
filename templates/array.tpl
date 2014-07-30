@@ -1,10 +1,7 @@
 <div class="array">
 	<div class="title">{{title}}</div>
 	<div class="item" data-name="{{name}}">
-		<div class="header"></div>
-		<div class="content">
-			{{{html}}}
-		</div>
+		{{{html}}}
 	</div>
 	<button class="append">
 		Add

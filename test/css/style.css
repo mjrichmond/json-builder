@@ -27,46 +27,81 @@ button {
 	padding: 4px 8px;
 }
 .title {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 25px 0 15px;
 	text-transform: capitalize;
-}
-.header {
-	background: #ececec;
-	background-image: linear-gradient(#f4f4f4, #ececec);
-	border-bottom: 1px solid #ddd;
-	height: 7px;
 }
 .content {
 	padding: 10px;
 }
-.array > .title {
-	font-weight: bold;
-	margin: 15px 0px;
+.array .array .title {
+	font-size: 14px;
 }
-.array .item {
+.item {
 	border: 1px solid #ddd;
 	border-radius: 2px;
 	overflow: hidden;
+	position: relative;
+	padding: 20px 10px 10px;
 }
-.array .item + .item {
+.item:before {
+	background: #ececec;
+	background-image: linear-gradient(#f4f4f4, #ececec);
+	border-bottom: 1px solid #ddd;
+	content: "";
+	position: absolute;
+	left: 0;
+	height: 10px;
+	right: 0;
+	top: 0;
+}
+.item + .item {
 	margin-top: 10px;
 }
-.array .item .content > .string input {
+.item > .string input {
 	border-bottom: none;
 	padding: 0;
 }
-.array .item .content > .string .title {
+.item > .string .title {
 	display: none;
 }
 .string .title {
 	color: #999;
 	font-size: 11px;
-	text-transform: uppercase;
+	font-weight: normal;
+	margin: 0;
+	text-transform: none;
 }
 .string + .string,
 .string + .object {
 	margin-top: 8px;
 }
-#form {
-	max-width: 280px;
+.append {
+	margin-left: 10px;
+}
+.item .append {
+	margin-left: 0px;
+}
+#wrap {
 	margin: 0 auto;
+	width: 760px;
+}
+#form {
+	float: left;
+	margin-right: 20px;
+	min-height: 1px;
+	padding-bottom: 100px;
+	width: 280px;
+}
+#output {
+	border-color: #ddd;
+	border-radius: 2px;
+	float: left;
+	font-size: 12px;
+	height: 4598px;
+	padding: 5px;
+	outline: 0;
+	resize: none;
+	width: 460px;
 }

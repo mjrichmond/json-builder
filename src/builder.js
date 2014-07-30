@@ -127,6 +127,10 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 		input.val(json);
 		break;
 	}
+	
+	if (name == "") {
+		this.form.trigger("change");
+	}
 };
 
 Builder.prototype.getFormValuesAsJSON = function() {
