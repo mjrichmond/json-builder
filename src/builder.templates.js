@@ -5,7 +5,7 @@ templates['array'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0,
     + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
     + "</div>\n	<div class=\"item\" data-name=\""
     + escapeExpression(((helper = helpers.name || (depth0 && depth0.name)),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
-    + "\">\n		";
+    + "\">\n		<div class=\"handle\"></div>\n		";
   stack1 = ((helper = helpers.html || (depth0 && depth0.html)),(typeof helper === functionType ? helper.call(depth0, {"name":"html","hash":{},"data":data}) : helper));
   if(stack1 || stack1 === 0) { buffer += stack1; }
   return buffer + "\n	</div>\n	<button class=\"append\">\n		Add\n	</button>\n	<button class=\"remove\">\n		Remove\n	</button>\n</div>\n";

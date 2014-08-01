@@ -14,18 +14,6 @@ Builder.prototype.init = function(json) {
 		e.preventDefault();
 		var self = $(this);
 		self.before(self.closest(".array").data("item"));
-		/*
-		var prev = $(this).prev(".item");
-		if (prev) {
-			prev.clone()
-				.insertAfter(prev)
-				.find("input")
-				.val("")
-				.end()
-				.find(".item:gt(0)")
-				.remove();
-		}
-		*/
 		form.trigger("change");
 	});
 
@@ -139,7 +127,20 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 	}
 	
 	if (name == "") {
-		this.form.trigger("change");
+		var form = this.form;
+		form.trigger("change");
+		if ($.fn.sortable) {
+			form.find(".array").sortable({
+				containment: "parent",
+				cursor: "row-resize",
+				items: ".item",
+				handle: ".handle",
+				scroll: false,
+				update: function() {
+					form.trigger("change");
+				}
+			});
+		}
 	}
 };
 

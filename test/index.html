@@ -8,6 +8,36 @@
 	<link rel="stylesheet" href="../css/json-builder.css">
 	<link rel="stylesheet" href="style.css">
 
+	<style>
+	body {
+		font: 14px Arial, sans-serif;
+		margin: 0;
+	}
+	#wrap {
+		margin: 0 auto;
+		width: 840px;
+	}
+	#form {
+		border-right: 1px solid #eee;
+		float: left;
+		min-height: 1px;
+		padding: 100px 40px 100px 0;
+		width: 280px;
+	}
+	#output {
+		border: 0;
+		float: left;
+		font-size: 12px;
+		height: 3200px;
+		margin-top: 100px;
+		margin-left: 40px;
+		padding: 16px 0;
+		outline: 0;
+		resize: none;
+		width: 460px;
+	}
+	</style>
+
 	</head>
 	<body>
 
@@ -16,8 +46,9 @@
 		<textarea id="output"></textarea>
 	</div>
 	
-	<script src="js/jquery.js"></script>
 	<script src="js/handlebars.runtime.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-ui.js"></script>
 
 	<script src="../src/builder.js"></script>
 	<script src="../src/builder.templates.js"></script>
@@ -29,13 +60,13 @@
 
 		$.ajax({
 		  dataType: "json",
-			url: "json/schema.json",
+			url: "schema.json",
 			cache: false,
 			success: function(data) {
 				builder.init(data);
 				$.ajax({
 					dataType: "json",
-					url: "json/resume.json",
+					url: "resume.json",
 					cache: false,
 					success: function(data) {
 						builder.setFormValues(data);

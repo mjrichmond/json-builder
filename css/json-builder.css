@@ -32,17 +32,19 @@ button {
 	font-size: 14px;
 }
 .item {
+	background: #fff;
 	border: 1px solid #ddd;
 	border-radius: 2px;
 	overflow: hidden;
 	position: relative;
 	padding: 20px 10px 10px;
 }
-.item:before {
+.item .handle {
 	background: #ececec;
 	background-image: linear-gradient(#f4f4f4, #ececec);
 	border-bottom: 1px solid #ddd;
 	content: "";
+	cursor: row-resize;
 	position: absolute;
 	left: 0;
 	height: 10px;
