@@ -15,7 +15,6 @@ button {
 	border-radius: 2px;
 	font-size: 13px;
 	margin: 0;
-	margin-top: 10px;
 	outline: 0;
 	padding: 4px 8px;
 }
@@ -35,6 +34,7 @@ button {
 	background: #fff;
 	border: 1px solid #ddd;
 	border-radius: 2px;
+	margin-bottom: 10px;
 	overflow: hidden;
 	position: relative;
 	padding: 20px 10px 10px;
@@ -51,15 +51,19 @@ button {
 	right: 0;
 	top: 0;
 }
-.item + .item {
-	margin-top: 10px;
-}
 .item > .string input {
 	border-bottom: none;
 	padding: 0;
 }
 .item > .string .title {
 	display: none;
+}
+.placeholder {
+	background: #f9f9f9;
+	border: 1px dashed #ddd;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	padding: 20px 10px 10px;
 }
 .string .title {
 	color: #999;
@@ -72,9 +76,9 @@ button {
 .string + .object {
 	margin-top: 8px;
 }
-.append {
+.add {
 	margin-left: 10px;
 }
-.item .append {
+.item .add {
 	margin-left: 0px;
 }

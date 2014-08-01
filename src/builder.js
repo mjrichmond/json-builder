@@ -10,7 +10,7 @@ Builder.prototype.init = function(json) {
 	this.resetForm();
 	
 	var form = this.form;
-	form.on("click", ".append", function(e) {
+	form.on("click", ".add", function(e) {
 		e.preventDefault();
 		var self = $(this);
 		self.before(self.closest(".array").data("item"));
@@ -135,6 +135,8 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 				cursor: "row-resize",
 				items: ".item",
 				handle: ".handle",
+				placeholder: "placeholder",
+				forcePlaceholderSize: true,
 				scroll: false,
 				update: function() {
 					form.trigger("change");

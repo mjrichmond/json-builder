@@ -8,7 +8,7 @@ templates['array'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0,
     + "\">\n		<div class=\"handle\"></div>\n		";
   stack1 = ((helper = helpers.html || (depth0 && depth0.html)),(typeof helper === functionType ? helper.call(depth0, {"name":"html","hash":{},"data":data}) : helper));
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer + "\n	</div>\n	<button class=\"append\">\n		Add\n	</button>\n	<button class=\"remove\">\n		Remove\n	</button>\n</div>\n";
+  return buffer + "\n	</div>\n	<button class=\"add\">\n		Add\n	</button>\n	<button class=\"remove\">\n		Remove\n	</button>\n</div>\n";
 },"useData":true});
 templates['object'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", buffer = "<div class=\"object\">\n	";

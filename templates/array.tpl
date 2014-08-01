@@ -4,7 +4,7 @@
 		<div class="handle"></div>
 		{{{html}}}
 	</div>
-	<button class="append">
+	<button class="add">
 		Add
 	</button>
 	<button class="remove">
