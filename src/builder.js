@@ -1,19 +1,21 @@
 function Builder(form) {
 	this.form = form.addClass("json-builder");
 	this.json = null;
+	this.items = [];
 }
 
 Builder.prototype.init = function(json) {	
 	this.json = json;
 	this.html = this.buildForm(json);
 
-	this.resetForm();
+	//this.resetForm();
 	
 	var form = this.form;
 	form.on("click", ".add", function(e) {
 		e.preventDefault();
 		var self = $(this);
-		self.before(self.closest(".array").data("item").clone());
+		var item = self.closest(".array").data("item").clone();
+		self.before(item);
 		form.trigger("change");
 	});
 
@@ -31,10 +33,19 @@ Builder.prototype.init = function(json) {
 
 Builder.prototype.resetForm = function() {
 	this.form.html(this.html);
-	var arrays = this.form.find(".array").get().reverse();
+	var self = this;
+	var arrays = this.form
+		.find(".array")
+		.get()
+		.reverse();
 	$(arrays).each(function() {	
-		var self = $(this);
-		self.data("item", self.children(".item").clone());
+		var array = $(this);
+		var name = array.data("name");
+		var item = array.children(".item");
+		if (!self.items[name]) {
+			self.items[name] = item.clone();
+		}
+		item.remove();
 	});
 };
 
@@ -52,9 +63,9 @@ Builder.prototype.buildForm = function(json, name, html) {
 	case "array":
 		var items = json.items;
 		html = Handlebars.templates["array"]({
-				name: name,
-				title: title,
-				html: this.buildForm(items, name)
+			name: name,
+			title: title,
+			html: this.buildForm(items, name)
 		});
 		break;
 		
@@ -94,20 +105,12 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 	var type = $.type(json);
 	switch (type) {
 	case "array":
-		var array = scope.find(".item[data-name='" + name + "']");
+		var array = scope.find(".array[data-name='" + name + "']");
+		var add = array.find(".add");
 		for (var i in json) {
-			if (i != 0) { 
-				array = array
-					.clone()
-					.find("input")
-					.val("")
-					.end()
-					.insertAfter(array)
-					.find(".item:gt(0)")
-					.remove()
-					.end();
-			}
-			this.setFormValues(json[i], array, name);
+			var item = this.items[name].clone();
+			this.setFormValues(json[i], item, name);
+			add.before(item)
 		}
 		break;
 	

@@ -1,4 +1,4 @@
-<div class="array">
+<div class="array" data-name="{{name}}">
 	<div class="title">
 		{{title}}
 	</div>
