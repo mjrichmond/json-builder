@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "author": "Mattias Erming",
-	"scripts": {
-		"preinstall": "sudo npm install -g handlebars"
-	},
+  "scripts": {
+    "preinstall": "sudo npm install -g handlebars"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/erming/json-builder"

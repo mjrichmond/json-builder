@@ -76,16 +76,23 @@
 
 		var output = $("#output");
 		form.on("change", function() {
-			output.val(builder.getFormValuesAsJSON());
+			var json = builder.getFormValuesAsJSON();
+			if (output.val() !== json) {
+				output.val(json);
+			};
 		});
 
-		output.on("input", function() {
-			try {
-				var text = output.val();
-				builder.setFormValues(JSON.parse(text));
-			} catch(e) {
-				// ..
-			}
+		var timer = null;
+		output.on("keyup", function() {
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				try {
+					var text = output.val();
+					builder.setFormValues(JSON.parse(text));
+				} catch(e) {
+					// ..
+				}
+			}, 200);
 		});
 	});
 	</script>
