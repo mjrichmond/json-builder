@@ -8,14 +8,17 @@ Builder.prototype.init = function(json) {
 	this.json = json;
 	this.html = this.buildForm(json);
 
-	//this.resetForm();
+	this.resetForm();
 	
+	var self = this;
 	var form = this.form;
+
 	form.on("click", ".add", function(e) {
 		e.preventDefault();
-		var self = $(this);
-		var item = self.closest(".array").data("item").clone();
-		self.before(item);
+		var add = $(this);
+		var name = add.closest(".array").data("name");
+		var item = self.items[name].clone();
+		add.before(item);
 		form.trigger("change");
 	});
 
