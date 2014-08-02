@@ -1,5 +1,5 @@
 function Builder(form) {
-	this.form = form;
+	this.form = form.addClass("json-builder");
 	this.json = null;
 }
 
@@ -13,14 +13,14 @@ Builder.prototype.init = function(json) {
 	form.on("click", ".add", function(e) {
 		e.preventDefault();
 		var self = $(this);
-		self.before(self.closest(".array").data("item"));
+		self.before(self.closest(".array").data("item").clone());
 		form.trigger("change");
 	});
 
 	form.on("click", ".remove", function(e) {
 		e.preventDefault();
 		var self = $(this);
-		self.closest(".array").children(".item").last().remove();
+		self.closest(".array").children(".item:last").remove();
 		form.trigger("change");
 	});
 

@@ -1,5 +1,7 @@
 <div class="array">
-	<div class="title">{{title}}</div>
+	<div class="title">
+		{{title}}
+	</div>
 	<div class="item" data-name="{{name}}">
 		<div class="handle"></div>
 		{{{html}}}
