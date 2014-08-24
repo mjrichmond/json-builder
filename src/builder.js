@@ -4,7 +4,7 @@ function Builder(form) {
 	this.items = [];
 }
 
-Builder.prototype.init = function(json) {	
+Builder.prototype.init = function(json, cb) {	
 	this.json = json;
 	this.html = this.buildForm(json);
 
@@ -32,6 +32,10 @@ Builder.prototype.init = function(json) {
 	form.on("input", "input, textarea", function() {
 		form.trigger("change");
 	});
+
+	if (typeof cb === "function") {
+		cb();
+	}
 };
 
 Builder.prototype.resetForm = function() {

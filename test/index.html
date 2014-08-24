@@ -20,7 +20,7 @@
 		border-right: 1px solid #eee;
 		float: left;
 		min-height: 1px;
-		padding: 100px 40px 100px 0;
+		padding: 50px 40px 100px 0;
 		width: 280px;
 	}
 	#output {
@@ -28,7 +28,7 @@
 		float: left;
 		font-size: 12px;
 		height: 3200px;
-		margin-top: 100px;
+		margin-top: 50px;
 		margin-left: 40px;
 		padding: 16px 0;
 		outline: 0;
@@ -59,13 +59,15 @@
 
 		$.ajax({
 		  dataType: "json",
-			url: "schema.json",
+			url: "json/schema.json",
 			cache: false,
 			success: function(data) {
-				builder.init(data);
+				builder.init(data, function() {
+					console.log("Callback triggered.");
+				});
 				$.ajax({
 					dataType: "json",
-					url: "resume.json",
+					url: "json/resume.json",
 					cache: false,
 					success: function(data) {
 						builder.setFormValues(data);
