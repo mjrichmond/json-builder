@@ -8,6 +8,16 @@
 	resize: none;
 	width: 100%;
 }
+.json-builder textarea {
+	border: none;
+	border-bottom: 1px solid #ddd;
+	font-size: 13px;
+	margin: 0;
+	outline: none;
+	padding: 3px 0 6px;
+	resize: vertical;
+	width: 100%;
+}
 .json-builder button {
 	font-size: 11px;
 	margin: 0;
@@ -68,9 +78,23 @@
 	margin: 0;
 }
 .json-builder .string + .string,
+.json-builder .string + .text,
 .json-builder .string + .object {
 	margin-top: 8px;
 }
+.json-builder .text .title {
+	color: #999;
+	font-size: 11px;
+	font-family: monospace;
+	font-weight: normal;
+	margin: 0;
+}
+.json-builder .text + .string,
+.json-builder .text + .text
+.json-builder .text + .object {
+	margin-top: 8px;
+}
+
 .json-builder .add {
 	margin-left: 10px;
 }

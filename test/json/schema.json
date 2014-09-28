@@ -34,7 +34,7 @@
 					"format": "uri"
 				},
 				"summary": {
-					"type": "string",
+					"type": "text",
 					"description": "Write a short 2-3 sentence biography about yourself"
 				},
 				"location": {

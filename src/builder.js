@@ -97,6 +97,13 @@ Builder.prototype.buildForm = function(json, name, html) {
 			title: title
 		});
 		break;
+
+	case "text":
+		html = Handlebars.templates["text"]({
+			name: name,
+			title: title
+		});
+		break;
 	}
 	
 	return html;
@@ -132,6 +139,11 @@ Builder.prototype.setFormValues = function(json, scope, name) {
 	
 	case "string":
 		var input = scope.find("input[name='" + name + "']");
+		input.val(json);
+		break;
+
+	case "text":
+		var input = scope.find("textarea[name='" + name + "']");
 		input.val(json);
 		break;
 	}
@@ -215,6 +227,17 @@ Builder.prototype.getFormValues = function() {
 		
 		case "string":
 			var inputs = form.find("input[name='" + name + "']");
+			if ($.type(scope) != "array") {
+				scope[key] = inputs.eq(0).val();
+			} else {
+				inputs.each(function() {
+					scope.push($(this).val());
+				});
+			}
+			break;
+
+		case "text":
+			var inputs = form.find("textarea[name='" + name + "']");
 			if ($.type(scope) != "array") {
 				scope[key] = inputs.eq(0).val();
 			} else {

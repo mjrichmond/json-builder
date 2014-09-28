@@ -26,4 +26,12 @@ templates['string'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0
     + escapeExpression(((helper = helpers.name || (depth0 && depth0.name)),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
     + "\" value=\"\">\n	</label>\n</div>\n";
 },"useData":true});
+templates['text'] = template({"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", escapeExpression=this.escapeExpression;
+  return "<div class=\"text\">\n	<label>\n		<div class=\"title\">"
+    + escapeExpression(((helper = helpers.title || (depth0 && depth0.title)),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
+    + "</div>\n		<textarea name=\""
+    + escapeExpression(((helper = helpers.name || (depth0 && depth0.name)),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
+    + "\" value=\"\"></textarea>\n	</label>\n</div>\n";
+},"useData":true});
 })();
